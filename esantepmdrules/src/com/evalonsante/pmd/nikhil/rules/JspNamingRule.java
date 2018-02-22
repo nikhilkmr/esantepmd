@@ -5,9 +5,10 @@ package com.evalonsante.pmd.nikhil.rules;
 
 import java.util.regex.Pattern;
 
-import net.sourceforge.pmd.lang.java.rule.AbstractJavaRule;
+import com.evalonsante.pmd.constants.ErrorMessage;
+import com.evalonsante.pmd.constants.RegularExpression;
+
 import net.sourceforge.pmd.lang.jsp.ast.ASTJspComment;
-import net.sourceforge.pmd.lang.jsp.ast.ASTJspDeclaration;
 import net.sourceforge.pmd.lang.jsp.ast.ASTJspDeclarations;
 import net.sourceforge.pmd.lang.jsp.ast.ASTJspDirective;
 import net.sourceforge.pmd.lang.jsp.ast.ASTJspDirectiveAttribute;
@@ -16,13 +17,11 @@ import net.sourceforge.pmd.lang.jsp.ast.ASTJspExpression;
 import net.sourceforge.pmd.lang.jsp.ast.ASTJspExpressionInAttribute;
 import net.sourceforge.pmd.lang.jsp.rule.AbstractJspRule;
 
-import com.evalonsante.pmd.constants.ErrorMessage;
-import com.evalonsante.pmd.constants.RegularExpression;
-
 /**
  * @author nnikhil
- *
- *         15-Oct-2016
+ * Created on:15-Oct-2016
+ * 
+ *         
  *         
  */
 public class JspNamingRule extends AbstractJspRule {
