@@ -12,7 +12,7 @@ import net.sourceforge.pmd.lang.java.rule.AbstractJavaRule;
 
 /**
  * @author nisnegi
- * modified on :22-feb-2018
+ * Created on :22-feb-2018
  */
 public class ParametersRule extends AbstractJavaRule
 {
@@ -22,12 +22,12 @@ public class ParametersRule extends AbstractJavaRule
         ASTClassOrInterfaceDeclaration cls = node.getFirstParentOfType(ASTClassOrInterfaceDeclaration.class);
 
         List<ASTMethodDeclaration> methods = cls.findDescendantsOfType(ASTMethodDeclaration.class);
-        boolean excessiveParameters = false;
+
         for (ASTMethodDeclaration method : methods)
         {
             Node node1 = method.findDescendantsOfType(ASTFormalParameters.class).get(0);
             int count = node1.jjtGetNumChildren();
-            if (count > 4)
+            if (count > 5)
             {
                 addViolationWithMessage(data, node, ErrorMessage.METHOD_PARAMETER_RULE.toString());
             }
