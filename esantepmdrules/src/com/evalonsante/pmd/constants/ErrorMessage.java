@@ -5,7 +5,7 @@ package com.evalonsante.pmd.constants;
 
 /**
  * @author nnikhil
- *
+ * branching test.
  */
 public enum ErrorMessage {
 	INTERFACE_NAME_RULE("An interface name must start with 'I'"),
