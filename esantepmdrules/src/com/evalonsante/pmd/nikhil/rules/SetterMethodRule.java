@@ -42,7 +42,7 @@ public class SetterMethodRule extends AbstractJavaRule {
             }
             if (isGenuineSetter)
             {
-
+                //set methgod should only have return statement
                 int i = node.getBlock().jjtGetNumChildren();
                 if (i > 1)
                 {
