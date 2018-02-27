@@ -5,12 +5,15 @@ package com.evalonsante.pmd.nikhil.rules;
 
 import java.util.List;
 
+import org.jaxen.JaxenException;
+
 import com.evalonsante.pmd.constants.ErrorMessage;
 
 import net.sourceforge.pmd.lang.ast.Node;
 import net.sourceforge.pmd.lang.java.ast.ASTClassOrInterfaceDeclaration;
 import net.sourceforge.pmd.lang.java.ast.ASTFieldDeclaration;
 import net.sourceforge.pmd.lang.java.ast.ASTMethodDeclaration;
+import net.sourceforge.pmd.lang.java.ast.ASTReturnStatement;
 import net.sourceforge.pmd.lang.java.ast.ASTVariableDeclaratorId;
 import net.sourceforge.pmd.lang.java.rule.AbstractJavaRule;
 
@@ -51,10 +54,36 @@ public class GetterMethodRule extends AbstractJavaRule
 
             }
             if (isGenuineGetter)
-            {
+            { boolean flag = true;
 
                 int i = node.getBlock().jjtGetNumChildren();
-                if (i > 1)
+                if (i == 1)
+                {                  
+                    if (node.getFirstDescendantOfType(ASTReturnStatement.class) != null)
+                    {
+                    Node node1 = node.getFirstDescendantOfType(ASTReturnStatement.class);
+                        Node primaryPrefix = null;
+                        try
+                        {
+                            primaryPrefix = node1.findChildNodesWithXPath("./Expression/PrimaryExpression/PrimaryPrefix/Name").get(0);
+                        }
+                        catch (JaxenException e)
+                        {
+                            // TODO Auto-generated catch block
+                            e.printStackTrace();
+                        }
+                        if (primaryPrefix != null && fieldNameFrmMethod.toLowerCase().equals(primaryPrefix.getImage()))
+                        {
+                            flag = false;
+                        }
+
+                }
+                    if (flag == true)
+                    {
+                        addViolationWithMessage(data, node, ErrorMessage.GETTER_METHOD_RULE.toString());
+                    }
+                }
+                else
                 {
                     addViolationWithMessage(data, node, ErrorMessage.GETTER_METHOD_RULE.toString());
                 }

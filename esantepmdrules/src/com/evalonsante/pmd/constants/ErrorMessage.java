@@ -14,7 +14,8 @@ public enum ErrorMessage {
 	GETTER_METHOD_RULE("getter methods must not have anycode other than getting value."), 
 	SETTER_METHOD_RULE("setter methods must not have anycode other than getting value."),
     JSP_NAME_RULE("Name of a JSP must start with transaction code"), METHOD_PARAMETER_RULE("Method must not have excessive number of parameters"), REMOVE_METHOD_RULE(
-            "Use of remove() and removeAll() method should be avoided");
+            "Use of remove() and removeAll() method should be avoided"), OBJECT_NAME_RULE("Object name should be same as class name with camel case."), STRING_COMPARISON_RULE(
+                    "String literal should appear at the beginning while comparing Strings,to avoid Null Pointer Exception.");
 	
 	 private final String msg;
 
