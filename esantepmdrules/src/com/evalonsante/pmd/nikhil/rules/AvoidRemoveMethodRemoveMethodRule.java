@@ -33,23 +33,13 @@ public class AvoidRemoveMethodRemoveMethodRule extends AbstractJavaRule
                 {
                     String[] varName = funcName.split("\\.", 2);
                     String var = varName[0].toString();
-                    // List<Node> declarations = cls.findChildNodesWithXPath("//ClassOrInterfaceBody/ClassOrInterfaceBodyDeclaration");
+
                     List<Node> declarations = cls
                             .findChildNodesWithXPath("//ClassOrInterfaceType[@Image='List' or @Image='Set' or @Image='ArrayList' or @Image='LinkedList' or @Image='Vector']");
-                    //                    List<Node> dec1 = cls.findChildNodesWithXPath("//ClassOrInterfaceType[@Image='Set']");
-                    //                    List<Node> dec2 = cls.findChildNodesWithXPath("//ClassOrInterfaceType[@Image='ArrayList']");
-                    //                    List<Node> dec3 = cls.findChildNodesWithXPath("//ClassOrInterfaceType[@Image='LinkedList']");
-                    //                    List<Node> dec4 = cls.findChildNodesWithXPath("//ClassOrInterfaceType[@Image='Vector']");
-                    //                    declarations.addAll(dec1);
-                    //                    declarations.addAll(dec2);
-                    //                    declarations.addAll(dec3);
-                    //                    declarations.addAll(dec4);
-                    //List<ASTClassOrInterfaceType> type = null;
-                    // List<ASTVariableDeclaratorId> name = null;
+
                     for (Node declaration : declarations)
                     {
-                        // type = declaration.findDescendantsOfType(ASTClassOrInterfaceType.class);
-                        // String typeImage = type.get(0).getImage();
+
                         ASTClassOrInterfaceBodyDeclaration parent = declaration.getFirstParentOfType(ASTClassOrInterfaceBodyDeclaration.class);
 
                         List<ASTVariableDeclaratorId> name = parent.findDescendantsOfType(ASTVariableDeclaratorId.class);
