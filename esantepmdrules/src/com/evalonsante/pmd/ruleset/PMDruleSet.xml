@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ruleset xmlns="http://pmd.sourceforge.net/ruleset/2.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         name="dldldl"
+         name="EvolanSanteRule"
          xsi:schemaLocation="http://pmd.sourceforge.net/ruleset/2.0.0 http://pmd.sourceforge.net/ruleset_2_0_0.xsd">
-   <description>PMD Plugin preferences rule set</description>
+   <description>PMD Plugin preferences rule set : specially designed for Evolan Sante</description>
    <rule ref="rulesets/java/design.xml/AbstractClassWithoutAbstractMethod"/>
    <rule ref="rulesets/java/design.xml/AbstractClassWithoutAnyMethod"/>
    <rule ref="rulesets/java/naming.xml/AbstractNaming"/>
