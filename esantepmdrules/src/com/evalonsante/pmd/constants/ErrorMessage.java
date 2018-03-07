@@ -20,9 +20,7 @@
  * SOFTWARE.
  */
 
-
 package com.evalonsante.pmd.constants;
-
 
 /**
  * 
@@ -31,31 +29,34 @@ package com.evalonsante.pmd.constants;
  * commit test
  * @author nisnegi
  * modified on :21-feb-2018
+ * @author nisnegi
+ * modified on :06-june-2018
  */
 
-public enum ErrorMessage {
-	INTERFACE_NAME_RULE("An interface name must start with 'I'"), GETTER_METHOD_RULE(
-			"getter methods must not have anycode other than getting value."), SETTER_METHOD_RULE(
-			"setter methods must not have anycode other than getting value."), JSP_NAME_RULE(
-			"Name of a JSP must start with transaction code"), METHOD_PARAMETER_RULE(
-			"Method must not have excessive number of parameters"), REMOVE_METHOD_RULE(
-			"Use of remove() and removeAll() method should be avoided"), OBJECT_NAME_RULE(
-			"Object name should be same as class name with camel case."), STRING_COMPARISON_RULE(
-			"String literal should appear at the beginning while comparing Strings,to avoid Null Pointer Exception.");
+public enum ErrorMessage
+{
+    INTERFACE_NAME_RULE("An interface name must start with 'I'"), GETTER_METHOD_RULE("getter methods must not have anycode other than getting value."), SETTER_METHOD_RULE(
+            "setter methods must not have anycode other than getting value."), JSP_NAME_RULE("Name of a JSP must start with transaction code"), METHOD_PARAMETER_RULE(
+                    "Method must not have excessive number of parameters"), REMOVE_METHOD_RULE("Use of remove() and removeAll() method should be avoided"), OBJECT_NAME_RULE(
+                            "Object name should be same as class name with camel case."), STRING_COMPARISON_RULE(
+                                    "String literal should appear at the beginning while comparing Strings,to avoid Null Pointer Exception."), RECORD_NAME_RULE(
+                                    "Record name should follow the naming convention as : “PS”+ Class Name + MethodName + XXX ,where XXX ->(000-999)");
 
-	private final String msg;
+    private final String msg;
 
-	private ErrorMessage(final String msg) {
-		this.msg = msg;
-	}
+    private ErrorMessage(final String msg)
+    {
+        this.msg = msg;
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Enum#toString()
-	 */
-	@Override
-	public String toString() {
-		return msg;
-	}
+    /*
+     * (non-Javadoc)
+     * 
+     * @see java.lang.Enum#toString()
+     */
+    @Override
+    public String toString()
+    {
+        return msg;
+    }
 }

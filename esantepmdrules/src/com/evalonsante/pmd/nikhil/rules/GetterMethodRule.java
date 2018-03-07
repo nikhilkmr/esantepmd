@@ -47,7 +47,7 @@ public class GetterMethodRule extends AbstractJavaRule {
 		.getFirstParentOfType(ASTClassOrInterfaceDeclaration.class);
 	List<ASTFieldDeclaration> fields = cls
 		.findDescendantsOfType(ASTFieldDeclaration.class);
-	String fieldNameFrmMethod = null;
+	final String fieldNameFrmMethod;
 	if (node.getMethodName().startsWith("get")
 		|| node.getMethodName().startsWith("is")) {
 	    if (node.getMethodName().startsWith("get")) {
@@ -55,17 +55,11 @@ public class GetterMethodRule extends AbstractJavaRule {
 	    } else {
 		fieldNameFrmMethod = node.getMethodName().substring(2);
 	    }
+	    
 	    boolean isGenuineGetter = false;
-	    for (ASTFieldDeclaration field : fields) {
-		Node node1 = field.findDescendantsOfType(
-			ASTVariableDeclaratorId.class).get(0);
-		if (node1.getImage().toLowerCase()
-			.equals(fieldNameFrmMethod.toLowerCase())) {
-		    isGenuineGetter = true;
-		    break;
-		}
-
-	    }
+	    isGenuineGetter = fields.stream().anyMatch(p -> p.getVariableName().toLowerCase()
+			.equals(fieldNameFrmMethod.toLowerCase()));
+	    
 	    if (isGenuineGetter) {
 		boolean flag = true;
 
