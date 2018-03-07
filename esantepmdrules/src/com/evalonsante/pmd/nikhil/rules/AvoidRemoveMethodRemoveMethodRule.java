@@ -47,8 +47,8 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import net.sourceforge.pmd.lang.ast.Node;
-import net.sourceforge.pmd.lang.java.ast.ASTClassOrInterfaceDeclaration;
-import net.sourceforge.pmd.lang.java.ast.ASTMethodDeclaration;
+import net.sourceforge.pmd.lang.java.ast.ASTName;
+import net.sourceforge.pmd.lang.java.ast.ASTStatementExpression;
 import net.sourceforge.pmd.lang.java.rule.AbstractJavaRule;
 
 import org.jaxen.JaxenException;
@@ -66,54 +66,33 @@ public class AvoidRemoveMethodRemoveMethodRule extends AbstractJavaRule
 
 {
 
-    public Object visit(ASTMethodDeclaration node, Object data)
+    public Object visit(ASTStatementExpression node, Object data)
 
     {
-
-	ASTClassOrInterfaceDeclaration cls = node
-		.getFirstParentOfType(ASTClassOrInterfaceDeclaration.class);
-
-	try
-
-	{
-
-	    List<String> declarations = cls
-		    .findChildNodesWithXPath(
-			    "//ClassOrInterfaceType[@Image='List' or @Image='Set' or @Image='ArrayList' or @Image='LinkedList' or @Image='Vector']/../../../VariableDeclarator/VariableDeclaratorId[@Image]")
-		    .stream().map(s -> s.getImage())
-		    .collect(Collectors.toList());
-
-	    List<Node> functioncalls = cls
-		    .findChildNodesWithXPath("//BlockStatement/Statement/StatementExpression/PrimaryExpression/PrimaryPrefix/Name");
-
-	    Map<String, Node> methodCallPrefixes = functioncalls
-		    .stream()
-		    .filter(s -> s.getImage().endsWith(".remove")
-			    || s.getImage().endsWith(".removeAll"))
-		    .collect(
-			    Collectors.toMap(
-				    p -> p.getImage().split("\\.", 2)[0],
-				    p -> p));
-
-	    methodCallPrefixes.forEach((key, nodeValue) -> {
-		if (declarations.contains(key)) {
-		    addViolationWithMessage(data, nodeValue,
+	List<String> declarations;
+	try {
+	    declarations = node
+	    	.findChildNodesWithXPath(
+	    		"//ClassOrInterfaceType[@Image='List' or @Image='Set' or @Image='ArrayList' or @Image='LinkedList' or @Image='Vector']/../../../VariableDeclarator/VariableDeclaratorId[@Image]")
+	    		.stream().map(s -> s.getImage())
+	    		.collect(Collectors.toList());
+	    ASTName method = node.getFirstDescendantOfType(ASTName.class);
+	    if (method!=null && (method.getImage().endsWith(".remove") || method.getImage().endsWith(".removeAll")) )
+	    {
+		String methodCalleeVariable = method.getImage().split("\\.", 2)[0];
+		if (declarations.contains(methodCalleeVariable)) {
+		    addViolationWithMessage(data, node,
 			    ErrorMessage.REMOVE_METHOD_RULE.toString());
 		}
-	    });
-
-	}
-
-	catch (JaxenException e)
-
-	{
-
+		
+	    }
+	} catch (JaxenException e) {
 	    // TODO Auto-generated catch block
-
 	    e.printStackTrace();
-
 	}
 
+
+	
 	return data;
 
     }
