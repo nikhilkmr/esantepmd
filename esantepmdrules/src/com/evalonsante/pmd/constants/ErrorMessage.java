@@ -40,7 +40,7 @@ public enum ErrorMessage
                     "Method must not have excessive number of parameters"), REMOVE_METHOD_RULE("Use of remove() and removeAll() method should be avoided"), OBJECT_NAME_RULE(
                             "Object name should be same as class name with camel case."), STRING_COMPARISON_RULE(
                                     "String literal should appear at the beginning while comparing Strings,to avoid Null Pointer Exception."), RECORD_NAME_RULE(
-                                    "Record name should follow the naming convention as : “PS”+ Class Name + MethodName + XXX ,where XXX ->(000-999)");
+                                            "Record name should follow the naming convention as : 'PS'+ Class Name + MethodName + XXX ,where XXX ->(000-999)");
 
     private final String msg;
 
